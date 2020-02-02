@@ -36,6 +36,9 @@ if ! zgen saved; then
    # theme
    zgen load romkatv/powerlevel10k powerlevel10k
 
+   # nvm
+   zgen load lukechilds/zsh-nvm
+
    # generate the init script from plugins above
    zgen save
 fi
