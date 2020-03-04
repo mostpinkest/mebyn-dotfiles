@@ -1,3 +1,8 @@
+# Check zsh load times
+# zmodload zsh/zprof
+
+rm "${HOME}/.zcompdump"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -10,39 +15,34 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=5000
 # End of lines configured by zsh-newuser-install
+
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/melvin/.zshrc'
 
-autoload -Uz compinit
-compinit
+autoload -Uz compinit 
+
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+
+compinit -C
 # End of lines added by compinstall
+
+# Turn off all beeps
+unsetopt BEEP
+
+# Add aliases
+alias start="explorer.exe"
+alias python="python3"
+alias pip="pip3"
+
+# JEnv
+(jenv rehash &) 2> /dev/null
 
 # load zgen
 source "${HOME}/.zgen/zgen.zsh"
 
-# if the init script doesn't exist
-if ! zgen saved; then
-   zgen load unixorn/autoupdate-zgen
-
-   # completions
-   zgen load zsh-users/zsh-completions src
-
-   zgen load zsh-users/zsh-autosuggestions
-
-   # specify plugins here
-   zgen load zsh-users/zsh-syntax-highlighting
-   zgen load zsh-users/zsh-history-substring-search
-
-   # theme
-   zgen load romkatv/powerlevel10k powerlevel10k
-
-   # nvm
-   zgen load lukechilds/zsh-nvm
-
-   # generate the init script from plugins above
-   zgen save
-fi
-
+# Custom key binding
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey "^[[1;3C" forward-word
@@ -108,11 +108,31 @@ for key     kcap   seq        mode   widget (
   bindkey ${terminfo[$kcap]-$seq} key-$key
 }
 
+# if the init script doesn't exist
+if ! zgen saved; then
+   zgen load unixorn/autoupdate-zgen
+
+   # completions
+   zgen load zsh-users/zsh-completions src
+
+   zgen load zsh-users/zsh-autosuggestions
+
+   # specify plugins here
+   zgen load zsh-users/zsh-syntax-highlighting
+   zgen load zsh-users/zsh-history-substring-search
+
+   # theme
+   zgen load romkatv/powerlevel10k powerlevel10k
+
+   # nvm
+   zgen load lukechilds/zsh-nvm
+   
+   # generate the init script from plugins above
+   zgen save
+fi
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Turn off all beeps
-unsetopt BEEP
-alias start="explorer.exe"
-alias python="python3"
-alias pip="pip3"
+# end check
+# zprof
