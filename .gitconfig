@@ -1,11 +1,11 @@
 [user]
         email = melvin.sy@outlook.com
-	name = M
+	name = Melvin
 [core]
 	editor = vim
 [alias]
   # Git pull from remote(origin) feature branch
-  pm = pull origin master
+  rema = pull --rebase origin master
 
   ac = !git add -A && git commit
   s = status -s
