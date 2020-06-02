@@ -6,11 +6,19 @@
 [alias]
   # Git pull from remote(origin) feature branch
   rema = pull --rebase origin master
+  pfl = push --force-with-lease
 
   ac = !git add -A && git commit
   s = status -s
   ca = commit --amend
 
+  # Git stash
+  st = stash
+  stp = stash pop
+  stl = stash list
+  sts = stash show
+  stc = stash clear
+  
   # Git checkout
   co = checkout
   cob = checkout -b
