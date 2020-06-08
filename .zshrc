@@ -40,10 +40,13 @@ alias pip="pip3"
 # load zgen
 source "${HOME}/.zgen/zgen.zsh"
 
+# Add forward-char widgets to PARTIAL_ACCEPT
+ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-word)
+
 # Custom key binding
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
-bindkey "^[[1;3C" forward-word
+bindkey "^@" forward-word
 
 r-delregion() {
   if ((REGION_ACTIVE)) then
