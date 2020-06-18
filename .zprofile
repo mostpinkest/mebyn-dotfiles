@@ -4,6 +4,8 @@ export NVM_LAZY_LOAD=true
 export PATH="$HOME/.cargo/bin:$PATH"
 # JEnv Setup
 export PATH="$HOME/.jenv/bin:$PATH"
+# Maven
+export PATH="/opt/apache-maven-3.6.3/bin:$PATH"
 
 # Try to find jenv, if it's not on the path
 export JENV_ROOT="${JENV_ROOT:=${HOME}/.jenv}"
