@@ -52,7 +52,7 @@ ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-word)
 # Custom key binding
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
-bindkey "^@" forward-word
+bindkey "^[[1;7C" forward-word
 
 r-delregion() {
   if ((REGION_ACTIVE)) then
