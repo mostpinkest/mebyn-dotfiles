@@ -1,8 +1,14 @@
 [user]
-	email = melvin.sy@outlook.com
-	name = Melvin
+  email = melvin.sy@outlook.com
+  name = Melvin
 [core]
-	editor = vim
+  editor = vim
+  autocrlf = true
+[pull]
+  rebase = true
+[rebase]
+  autosquash = true
+  autoStash = true
 [alias]
   # Git pull from remote(origin) feature branch
   rema = pull --rebase origin master
