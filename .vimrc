@@ -1,3 +1,4 @@
+map <Space> <Leader>
 set belloff=all
 set clipboard=unnamedplus
 
@@ -17,6 +18,8 @@ Plug 'junegunn/vim-easy-align'
 Plug 'https://github.com/tpope/vim-surround.git'
 
 Plug 'preservim/nerdtree'
+
+Plug 'preservim/nerdcommenter'
 
 call plug#end()
 
