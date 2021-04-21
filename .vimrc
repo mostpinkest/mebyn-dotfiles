@@ -1,6 +1,12 @@
+" Set OS specific settings
+if has('macunix')
+   set clipboard=unnamed
+   set belloff=all
+elseif has('unix')
+   set clipboard=unnamedplus
+endif
+
 map <Space> <Leader>
-set belloff=all
-set clipboard=unnamedplus
 
 " Install vim-plug if not found
 if empty(glob('~/.vim/autoload/plug.vim'))
