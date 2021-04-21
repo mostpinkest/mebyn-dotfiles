@@ -3,7 +3,13 @@
   name = Melvin
 [core]
   editor = vim
-  autocrlf = true
+  autocrlf = input
+  fscache = true
+  whitespace = cr-at-eol
+[color]
+  diff = auto
+  status = auto
+  branch = auto
 [pull]
   rebase = true
 [rebase]
