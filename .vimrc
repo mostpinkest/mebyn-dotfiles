@@ -5,7 +5,7 @@ if has('macunix')
 elseif has('unix')
    set clipboard=unnamedplus
 endif
-
+set number
 map <Space> <Leader>
 
 " Install vim-plug if not found
