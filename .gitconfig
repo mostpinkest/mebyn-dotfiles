@@ -1,6 +1,8 @@
 [user]
   email = melvin.sy@outlook.com
   name = Melvin
+[init]
+  defaultBranch = master
 [core]
   editor = vim
   autocrlf = input
