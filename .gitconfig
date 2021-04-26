@@ -18,6 +18,7 @@
   autosquash = true
   autoStash = true
 [alias]
+  all = "!f() { ls -R -d */.git | cut -d'.' -f1 | xargs -I{} git -C {} $1; }; f"
   # Git pull from remote(origin) feature branch
   rema = pull --rebase origin master
   pfl = push --force-with-lease
