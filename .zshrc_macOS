@@ -31,6 +31,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 # AdoptOpenJDK change java version
 jdk() {
   version=$1
@@ -44,7 +46,7 @@ export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 alias ls='ls -GFh'
 alias ll='ls -ltraG'
-
+alias k='kubectl'
 # zsh completions
 autoload -U compinit && compinit
 
@@ -95,3 +97,6 @@ zinit wait lucid for \
 # For history substring search
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
