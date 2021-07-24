@@ -22,6 +22,7 @@
   # Git pull from remote(origin) feature branch
   rema = pull --rebase origin master
   pfl = push --force-with-lease
+  ptr = push -u origin HEAD
 
   ac = !git add -A && git commit
   s = status -s
