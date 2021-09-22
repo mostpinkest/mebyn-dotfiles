@@ -8,6 +8,7 @@
   autocrlf = input
   fscache = true
   whitespace = cr-at-eol
+	eol = lf
 [color]
   diff = auto
   status = auto
@@ -18,7 +19,8 @@
   autosquash = true
   autoStash = true
 [alias]
-  all = "!f() { ls -R -d */.git | cut -d'.' -f1 | xargs -I{} git -C {} $1; }; f"
+  all = "!f() { ls -R -d */.git | xargs -I{} bash -c \"echo {} && git -C {}/../ $*\"; }; f"
+  sweep = "!f() { git branch --merged | egrep -v \"(^\\*|master|main)\" | xargs git branch -d; }; f"
   # Git pull from remote(origin) feature branch
   rema = pull --rebase origin master
   pfl = push --force-with-lease
@@ -62,3 +64,5 @@
   unhide = update-index --no-skip-worktree
   unhide-all = ls-files -v | grep -i ^S | cut -c 3- | xargs git update-index --no-skip-worktree
   hidden = ! git ls-files -v | grep '^S' | cut -c3-
+[http]
+	postBuffer = 524288000
