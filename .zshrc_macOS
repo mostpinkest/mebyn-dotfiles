@@ -117,3 +117,7 @@ eval "$(pyenv init -)"
 # OC Path
 export PATH="/Users/melvin/.crc/bin/oc:$PATH"
 eval $(crc oc-env)
+
+# .gitignore Generator
+echo "function gi() { curl -sLw \"\\\n\" https://www.toptal.com/developers/gitignore/api/\$@ ;}" >> \
+~/.zshrc && source ~/.zshrc
