@@ -191,10 +191,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 [ -s "$PYENV_ROOT/bin/pyenv" ] && eval "$(pyenv init -)"
 
-# OpenShift Console Path
-# export PATH="/Users/melvin/.crc/bin/oc:$PATH"
-# eval $(crc oc-env)
-
 # .gitignore Generator
 function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
 
