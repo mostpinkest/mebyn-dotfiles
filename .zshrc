@@ -1,145 +1,208 @@
-# Check zsh load times
-# zmodload zsh/zprof
+export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+if [ ! -d "$ZIM_HOME" ]; then
+    curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
+fi
+# Start configuration added by Zim install {{{
+#
+# User configuration sourced by interactive shells
+#
 
-# ZSH History fix
-mv ~/.zsh_history ~/.zsh_history_bad
-strings ~/.zsh_history_bad > ~/.zsh_history
-fc -R ~/.zsh_history
-rm ~/.zsh_history_bad
+# -----------------
+# Zsh configuration
+# -----------------
+
+#
+# History
+#
+
+# Remove older command from the history if a duplicate is to be added.
+setopt HIST_IGNORE_ALL_DUPS
+
+#
+# Input/output
+#
+
+# Set editor default keymap to emacs (`-e`) or vi (`-v`)
+bindkey -e
+
+# Prompt for spelling correction of commands.
+#setopt CORRECT
+
+# Customize spelling correction prompt.
+#SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+
+# Remove path separator from WORDCHARS.
+WORDCHARS=${WORDCHARS//[\/]}
+
+# -----------------
+# Zim configuration
+# -----------------
+
+# Use degit instead of git as the default tool to install and update modules.
+#zstyle ':zim:zmodule' use 'degit'
+
+# --------------------
+# Module configuration
+# --------------------
+
+#
+# git
+#
+
+# Set a custom prefix for the generated aliases. The default prefix is 'G'.
+#zstyle ':zim:git' aliases-prefix 'g'
+
+#
+# input
+#
+
+# Append `../` to your input for each `.` you type after an initial `..`
+#zstyle ':zim:input' double-dot-expand yes
+
+#
+# termtitle
+#
+
+# Set a custom terminal title format using prompt expansion escape sequences.
+# See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
+# If none is provided, the default '%n@%m: %~' is used.
+#zstyle ':zim:termtitle' format '%1~'
+
+# Disable automatic widget re-binding on each precmd. This can be set when
+# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# Set what highlighters will be used.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+# Customize the main highlighter styles.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
+#typeset -A ZSH_HIGHLIGHT_STYLES
+#ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
+
+# ------------------
+# Initialize modules
+# ------------------
+export NVM_LAZY_LOAD=true
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+# Download zimfw plugin manager if missing.
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  if (( ${+commands[curl]} )); then
+    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  else
+    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  fi
+fi
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init -q
+fi
+# Initialize modules.
+source ${ZIM_HOME}/init.zsh
+
+# ------------------------------
+# Post-init module configuration
+# ------------------------------
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
+# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=5000
-# End of lines configured by zsh-newuser-install
+zmodload -F zsh/terminfo +p:terminfo
 
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/melvin/.zshrc'
+# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
+for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
+for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
+for key ('k') bindkey -M vicmd ${key} history-substring-search-up
+for key ('j') bindkey -M vicmd ${key} history-substring-search-down
+unset key
+# }}} End configuration added by Zim install
 
-autoload -Uz compinit 
+# ZSH profiler
+# zmodload zsh/zprof
 
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
+##############################################################################
+# History Configuration
+##############################################################################
+# Timestamp format
+case ${HIST_STAMPS-} in
+  "mm/dd/yyyy") alias history='omz_history -f' ;;
+  "dd.mm.yyyy") alias history='omz_history -E' ;;
+  "yyyy-mm-dd") alias history='omz_history -i' ;;
+  "") alias history='omz_history' ;;
+  *) alias history="omz_history -t '$HIST_STAMPS'" ;;
+esac
 
-compinit -C
-# End of lines added by compinstall
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
 
-# Turn off all beeps
-unsetopt BEEP
+setopt    appendhistory          # Append history to the history file (no overwriting)
+setopt    extended_history       # record timestamp of command in HISTFILE
+setopt    hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt    hist_ignore_dups       # ignore duplicated commands history list
+setopt    hist_ignore_space      # ignore commands that start with space
+setopt    hist_verify            # show command with history expansion to user before running it
+setopt    sharehistory           # Share history across terminals
+setopt    incappendhistory       # Immediately append to the history file, not just when a term is killed
 
-# Add aliases
-alias start="explorer.exe"
-alias python="python3"
-alias pip="pip3"
+# Golang
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 
-# JEnv
-(jenv rehash &) 2> /dev/null
-
-# load zgen
-source "${HOME}/.zgen/zgen.zsh"
-
-# Add forward-char widgets to PARTIAL_ACCEPT
-ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-word)
-
-# Custom key binding
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-bindkey "^[[1;7C" forward-word
-
-r-delregion() {
-  if ((REGION_ACTIVE)) then
-     zle kill-region
-  else
-    local widget_name=$1
-    shift
-    zle $widget_name -- $@
-  fi
+# AdoptOpenJDK change java version
+jdk() {
+  version=$1
+  export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
+  java -version
 }
+# GraavlVM
+export GRAALVM_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.3.1/Contents/Home
 
-r-deselect() {
-  ((REGION_ACTIVE = 0))
-  local widget_name=$1
-  shift
-  zle $widget_name -- $@
-}
-
-r-select() {
-  ((REGION_ACTIVE)) || zle set-mark-command
-  local widget_name=$1
-  shift
-  zle $widget_name -- $@
-}
-
-for key     kcap   seq        mode   widget (
-    sleft   kLFT   $'\e[1;2D' select   backward-char
-    sright  kRIT   $'\e[1;2C' select   forward-char
-    sup     kri    $'\e[1;2A' select   up-line-or-history
-    sdown   kind   $'\e[1;2B' select   down-line-or-history
-
-    send    kEND   $'\E[1;2F' select   end-of-line
-    send2   x      $'\E[4;2~' select   end-of-line
-
-    shome   kHOM   $'\E[1;2H' select   beginning-of-line
-    shome2  x      $'\E[1;2~' select   beginning-of-line
-
-    end     kend   $'\EOF'    deselect end-of-line
-    end2    x      $'\E4~'    deselect end-of-line
-
-    home    khome  $'\EOH'    deselect beginning-of-line
-    home2   x      $'\E1~'    deselect beginning-of-line
-
-    csleft  x      $'\E[1;6D' select   backward-word
-    csright x      $'\E[1;6C' select   forward-word
-    csend   x      $'\E[1;6F' select   end-of-line
-    cshome  x      $'\E[1;6H' select   beginning-of-line
-
-    cleft   x      $'\E[1;5D' deselect backward-word
-    cright  x      $'\E[1;5C' deselect forward-word
-
-    del     kdch1   $'\E[3~'  delregion delete-char
-    bs      x       $'^?'     delregion backward-delete-char
-
-) {
-  eval "key-$key() {
-    r-$mode $widget \$@
-  }"
-  zle -N key-$key
-  bindkey ${terminfo[$kcap]-$seq} key-$key
-}
-
-# if the init script doesn't exist
-if ! zgen saved; then
-   zgen load unixorn/autoupdate-zgen
-
-   # completions
-   zgen load zsh-users/zsh-completions src
-
-   zgen load zsh-users/zsh-autosuggestions
-
-   # specify plugins here
-   zgen load zsh-users/zsh-syntax-highlighting
-   zgen load zsh-users/zsh-history-substring-search
-
-   # theme
-   zgen load romkatv/powerlevel10k powerlevel10k
-
-   # nvm
-   zgen load lukechilds/zsh-nvm
-   
-   # generate the init script from plugins above
-   zgen save
-fi
+# Configure LS syntax highlighting
+export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+alias ls='ls -GFh'
+alias ll='ls -ltraG'
+alias k='kubectl'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# end check
+# Set P9k theme
+[[ ! -f ~/.theme ]] || source ~/.theme
+
+# ZVM Lazy key binding
+function zvm_after_lazy_keybindings() {
+  # In normal mode, press Ctrl-R to invoke this widget
+  zvm_bindkey vicmd '^R' history-search-multi-word
+  zvm_bindkey vicmd '^[[A' history-substring-search-up
+  zvm_bindkey vicmd '^[[B' history-substring-search-down
+}
+
+# autoload -U +X bashcompinit && bashcompinit
+# complete -o nospace -C /usr/local/bin/terraform terraform
+export PATH="/usr/local/sbin:$PATH"
+
+# Pyenv configuration
+alias python=python3
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+[ -s "$PYENV_ROOT/bin/pyenv" ] && eval "$(pyenv init -)"
+
+# .gitignore Generator
+function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
+
+# Haskell ghcup-env
+[ -f "/Users/melvin/.ghcup/env" ] && source "/Users/melvin/.ghcup/env" 
+
+# END Zsh Profiler
 # zprof
