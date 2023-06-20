@@ -2,7 +2,6 @@ export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 if [ ! -d "$ZIM_HOME" ]; then
     curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 fi
-
 # Start configuration added by Zim install {{{
 #
 # User configuration sourced by interactive shells
@@ -176,6 +175,9 @@ alias k='kubectl'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Set P9k theme
+[[ ! -f ~/.theme ]] || source ~/.theme
 
 # ZVM Lazy key binding
 function zvm_after_lazy_keybindings() {
