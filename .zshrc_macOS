@@ -1,3 +1,8 @@
+export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+if [ ! -d "$ZIM_HOME" ]; then
+    curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
+fi
+
 # Start configuration added by Zim install {{{
 #
 # User configuration sourced by interactive shells
