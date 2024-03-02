@@ -34,5 +34,3 @@ cask "maccy"
 cask "rectangle"
 # JDK from the Eclipse Foundation (Adoptium)
 cask "temurin"
-# JDK from the Eclipse Foundation (Adoptium)
-cask "temurin21"
