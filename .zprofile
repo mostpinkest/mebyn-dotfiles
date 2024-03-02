@@ -1,24 +1,12 @@
 # Lazy load NVM
 export NVM_LAZY_LOAD=true
-# Cargo
-export PATH="$HOME/.cargo/bin:$PATH"
-# JEnv Setup
-export PATH="$HOME/.jenv/bin:$PATH"
-# Maven
-export PATH="/opt/apache-maven-3.6.3/bin:$PATH"
 
-# Try to find jenv, if it's not on the path
-export JENV_ROOT="${JENV_ROOT:=${HOME}/.jenv}"
-if ! type jenv > /dev/null && [ -f "${JENV_ROOT}/bin/jenv" ]; then
-    export PATH="${JENV_ROOT}/bin:${PATH}"
-fi
+export HOMEBREW_PREFIX="/opt/homebrew";
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+export HOMEBREW_REPOSITORY="/opt/homebrew";
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
-# Lazy load jenv
-if type jenv > /dev/null; then
-    export PATH="${JENV_ROOT}/bin:${JENV_ROOT}/shims:${PATH}"
-    function jenv() {
-        unset -f jenv
-        eval "$(command jenv init - --no-rehash)"
-        jenv $@
-    }
-fi
+# Define aliases
+source ~/.aliases
