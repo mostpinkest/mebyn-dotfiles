@@ -17,7 +17,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
 Plug 'junegunn/vim-easy-align'
 
@@ -29,4 +29,5 @@ Plug 'preservim/nerdcommenter'
 
 call plug#end()
 
-colorscheme dracula
+set background=dark
+colorscheme catppuccin_mocha
