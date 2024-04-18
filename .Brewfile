@@ -1,7 +1,4 @@
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/cask-versions"
-tap "homebrew/core"
+tap "buo/cask-upgrade"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -34,3 +31,9 @@ cask "maccy"
 cask "rectangle"
 # JDK from the Eclipse Foundation (Adoptium)
 cask "temurin"
+# Google Chrome
+cask "google-chrome"
+# Spotify
+cask "spotify"
+# TempBox
+cask "tempbox"
