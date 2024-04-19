@@ -10,3 +10,5 @@ export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
 # Define aliases
 source ~/.aliases
+source ~/.kubectl_aliases
+source ~/.git_aliases

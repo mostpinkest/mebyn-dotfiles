@@ -162,8 +162,6 @@ jdk() {
   export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
   java -version
 }
-# GraavlVM
-export GRAALVM_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.3.1/Contents/Home
 
 # Configure LS syntax highlighting
 export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
@@ -200,9 +198,6 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 
 # .gitignore Generator
 function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
-
-# Haskell ghcup-env
-[ -f "/Users/melvin/.ghcup/env" ] && source "/Users/melvin/.ghcup/env" 
 
 # END Zsh Profiler
 # zprof

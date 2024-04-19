@@ -2,11 +2,11 @@
 
 echo "Setting up your Mac..."
 
+echo "Creating dotfiles symlink..."
 for dotfile in `find . -type f -name '.*'`; do
-    dfile=$(pwd)/$dotfile
-    if [ ! -f $dfile ]; then
+    if [ ! -f $HOME/$dotfile ]; then
       echo "Creating symlink for $dotfile"
-      ln -s $dfile $HOME
+      ln -s $(pwd)/$dotfile $HOME
     fi
 done
 
