@@ -19,6 +19,8 @@ brew "ripgrep"
 brew "swig"
 # General-purpose lossless data-compression library
 brew "zlib"
+# Kubernetes command-line interface
+brew "kubernetes-cli"
 # Tool to hide status bar icons
 cask "dozer"
 # Terminal emulator as alternative to Apple's Terminal app
