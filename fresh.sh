@@ -17,4 +17,3 @@ fi
 
 brew bundle install --file=$HOME/Brewfile
 brew bundle --force cleanup --file=$HOME/Brewfile
-
