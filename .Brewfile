@@ -1,4 +1,6 @@
 tap "buo/cask-upgrade"
+# wget Internet file retriever
+brew "wget"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -35,6 +37,8 @@ cask "rectangle"
 cask "temurin"
 # Google Chrome
 cask "google-chrome"
+# Google Cloud SDK
+cask "google-cloud-sdk"
 # Spotify
 cask "spotify"
 # TempBox

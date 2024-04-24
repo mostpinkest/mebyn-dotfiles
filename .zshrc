@@ -152,6 +152,10 @@ setopt    hist_verify            # show command with history expansion to user b
 setopt    sharehistory           # Share history across terminals
 setopt    incappendhistory       # Immediately append to the history file, not just when a term is killed
 
+# Executables
+export EXECPATH=$HOME/bin
+export PATH=$PATH:$EXECPATH
+
 # Golang
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
@@ -198,6 +202,13 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 
 # .gitignore Generator
 function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
+
+# GCloud
+source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+
+# bat command Theme
+BAT_THEME="base16-256"
 
 # END Zsh Profiler
 # zprof
