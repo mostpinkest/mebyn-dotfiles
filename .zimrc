@@ -63,3 +63,8 @@ zmodule zdharma-continuum/history-search-multi-word
 
 # NVM for ZSH
 zmodule lukechilds/zsh-nvm
+
+# Oh My Zsh Plugins
+zmodule ohmyzsh/ohmyzsh --source lib/git.zsh
+# Git aliases
+zmodule ohmyzsh/ohmyzsh --root plugins/git

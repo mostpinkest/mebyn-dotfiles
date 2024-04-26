@@ -18,8 +18,8 @@ fi
 brew bundle install --file=$HOME/Brewfile
 brew bundle --force cleanup --file=$HOME/Brewfile
 
-# Install bat catpuccin theme
-echo "Installing bat catpuccin theme"
+# Install bat catppuccin theme
+echo "Installing bat catppuccin theme"
 mkdir -p "$(bat --config-dir)/themes"
 wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
 bat cache --build

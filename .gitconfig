@@ -8,7 +8,7 @@
   autocrlf = input
   fscache = true
   whitespace = cr-at-eol
-	eol = lf
+  eol = lf
 [color]
   diff = auto
   status = auto
