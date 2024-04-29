@@ -15,6 +15,8 @@ brew "kotlin"
 brew "node"
 # Python version management
 brew "pyenv"
+# Execute binaries from Python packages in isolated environments
+brew "pipx"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Generate scripting interfaces to C/C++ code
@@ -23,6 +25,8 @@ brew "swig"
 brew "zlib"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
 # Tool to hide status bar icons
 cask "dozer"
 # Terminal emulator as alternative to Apple's Terminal app

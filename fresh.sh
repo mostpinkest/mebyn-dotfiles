@@ -19,8 +19,11 @@ brew bundle install --file=$HOME/Brewfile
 brew bundle --force cleanup --file=$HOME/Brewfile
 
 # Install bat catppuccin theme
-echo "Installing bat catppuccin theme"
-mkdir -p "$(bat --config-dir)/themes"
-wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
-bat cache --build
-echo "--theme=\"Catppuccin Mocha\"" >| $(bat --config-file)
+BATCONFIG_DIR=$(bat --config-dir)
+if [ ! -f "$BATCONFIG_DIR/themes/Catppuccin Mocha.tmTheme" ]; then
+  echo "Installing bat catppuccin theme"
+  mkdir -p "$BATCONFIG_DIR/themes"
+  wget -P "$BATCONFIG_DIR/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
+  bat cache --build
+  echo "--theme=\"Catppuccin Mocha\"" >| $(bat --config-file)
+fi
