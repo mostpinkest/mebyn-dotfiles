@@ -31,6 +31,8 @@ brew "helm"
 brew "jq"
 # Bazel
 brew "bazel"
+# Podman - Tool for managing OCI containers and pods
+brew "podman"
 # Tool to hide status bar icons
 cask "dozer"
 # Terminal emulator as alternative to Apple's Terminal app
