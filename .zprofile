@@ -11,3 +11,6 @@ export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 # Define aliases
 source ~/.aliases
 source ~/.kubectl_aliases
+
+# Created by `pipx` on 2024-04-29 10:09:34
+export PATH="$PATH:/Users/mesy/.local/bin"

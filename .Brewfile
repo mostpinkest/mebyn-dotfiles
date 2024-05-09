@@ -25,8 +25,12 @@ brew "swig"
 brew "zlib"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
+# Kubernetes package manager
+brew "helm"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Bazel
+brew "bazel"
 # Tool to hide status bar icons
 cask "dozer"
 # Terminal emulator as alternative to Apple's Terminal app
@@ -47,3 +51,5 @@ cask "google-cloud-sdk"
 cask "spotify"
 # TempBox
 cask "tempbox"
+# Notion, App to write, plan, collaborate, and get organised
+cask "notion"

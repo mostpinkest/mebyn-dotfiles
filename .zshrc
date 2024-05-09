@@ -195,6 +195,7 @@ export PATH="/usr/local/sbin:$PATH"
 
 # Pyenv configuration
 alias python=python3
+alias pip=pip3
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
@@ -212,3 +213,6 @@ BAT_THEME="base16-256"
 
 # END Zsh Profiler
 # zprof
+
+# Created by `pipx` on 2024-04-29 10:09:34
+export PATH="$PATH:/Users/mesy/.local/bin"
