@@ -178,9 +178,6 @@ alias k='kubectl'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Set P9k theme
-[[ ! -f ~/.theme ]] || source ~/.theme
-
 # ZVM Lazy key binding
 function zvm_after_lazy_keybindings() {
   # In normal mode, press Ctrl-R to invoke this widget
@@ -216,3 +213,6 @@ BAT_THEME="base16-256"
 
 # Created by `pipx` on 2024-04-29 10:09:34
 export PATH="$PATH:/Users/mesy/.local/bin"
+
+# To customize prompt, run `p10k configure` or edit ~/Code/dotfiles/.p10k.zsh.
+[[ ! -f ~/Code/dotfiles/.p10k.zsh ]] || source ~/Code/dotfiles/.p10k.zsh
