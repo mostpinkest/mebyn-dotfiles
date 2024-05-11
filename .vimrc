@@ -35,3 +35,12 @@ set termguicolors
 set background=dark
 colorscheme catppuccin_mocha
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" Show Whitespace toggle
+hi Whitespace ctermfg=DarkGray
+match Whitespace /\s/
+set listchars=tab:⇤–⇥,space:·,trail:·,precedes:⇠,extends:⇢,nbsp:×
+set list!
+noremap <F5> :set list!<CR>
+inoremap <F5> <C-o>:set list!<CR>
+cnoremap <F5> <C-c>:set list!<CR>
