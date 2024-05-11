@@ -1,4 +1,5 @@
 tap "buo/cask-upgrade"
+tap "homebrew/cask-fonts"
 # wget Internet file retriever
 brew "wget"
 # Cryptography and SSL/TLS Toolkit
@@ -55,3 +56,5 @@ cask "spotify"
 cask "tempbox"
 # Notion, App to write, plan, collaborate, and get organised
 cask "notion"
+# Fira Code
+cask "font-fira-code"
