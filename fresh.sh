@@ -30,3 +30,7 @@ if [ ! -f "$BATCONFIG_DIR/themes/Catppuccin Mocha.tmTheme" ]; then
   bat cache --build
   echo "--theme=\"Catppuccin Mocha\"" >| $(bat --config-file)
 fi
+
+# Set screenshot folder location to ~/Documents/Screenshots
+defaults write com.apple.screencapture location ~/Documents/Screenshots
+killall SystemUIServer
