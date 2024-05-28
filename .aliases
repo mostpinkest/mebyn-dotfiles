@@ -25,3 +25,4 @@ alias md='mkdir -p'
 alias rd=rmdir
 alias run-help=man
 alias which-command=whence
+alias brewup='brew update && brew upgrade --cask && brew cleanup'
