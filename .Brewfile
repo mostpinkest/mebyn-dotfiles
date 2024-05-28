@@ -34,8 +34,6 @@ brew "jq"
 brew "bazel"
 # Podman - Tool for managing OCI containers and pods
 brew "podman"
-# Tool to hide status bar icons
-cask "dozer"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # JetBrains tools manager
@@ -58,3 +56,7 @@ cask "tempbox"
 cask "notion"
 # Fira Code
 cask "font-fira-code"
+# VPN client for secure internet access and private browsing
+cask "surfshark"
+# Hidden Bar lets you hide menu bar items to give your Mac a cleaner look.
+cask "hiddenbar"
