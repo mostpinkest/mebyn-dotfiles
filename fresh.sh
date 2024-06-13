@@ -34,3 +34,10 @@ fi
 # Set screenshot folder location to ~/Documents/Screenshots
 defaults write com.apple.screencapture location ~/Documents/Screenshots
 killall SystemUIServer
+
+# Install rustup
+if ! [ -x "$(command -v rustup)" ] &> /dev/null
+then
+  curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+fi
+
