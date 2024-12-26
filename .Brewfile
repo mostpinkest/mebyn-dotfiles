@@ -28,6 +28,8 @@ brew "zlib"
 brew "kubernetes-cli"
 # Kubernetes package manager
 brew "helm"
+# Official Amazon AWS command-line interface
+brew "awscli"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Bazel
@@ -42,8 +44,10 @@ cask "jetbrains-toolbox"
 cask "maccy"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
-# JDK from the Eclipse Foundation (Adoptium)
+# Latest JDK from the Eclipse Foundation (Adoptium)
 cask "temurin"
+# JDK 21 from the Eclipse Foundation (Adoptium)
+cask "temurin@21"
 # Google Chrome
 cask "google-chrome"
 # Google Cloud SDK
@@ -60,3 +64,7 @@ cask "font-fira-code"
 cask "surfshark"
 # Hidden Bar lets you hide menu bar items to give your Mac a cleaner look.
 cask "hiddenbar"
+# E-books management software
+cask "calibre"
+# Open-source code editor
+cask "visual-studio-code"
