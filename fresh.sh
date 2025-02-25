@@ -15,7 +15,7 @@ if [ -f $HOME/.Brewfile ]; then
   mv $HOME/.Brewfile $HOME/Brewfile
 fi
 
-brew bundle install --file=$HOME/Brewfile
+brew bundle install --file=$HOME/Brewfile --verbose
 brew bundle --force cleanup --file=$HOME/Brewfile
 
 # Ensure pipx is in /bin

@@ -28,6 +28,8 @@ brew "zlib"
 brew "kubernetes-cli"
 # Kubernetes package manager
 brew "helm"
+# Interactive command-line tool for using emoji in commit messages
+brew "gitmoji"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Lightweight and flexible command-line JSON processor
