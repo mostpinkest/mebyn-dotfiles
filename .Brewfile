@@ -44,8 +44,6 @@ cask "iterm2"
 cask "jetbrains-toolbox"
 # Clipboard manager
 cask "maccy"
-# Move and resize windows using keyboard shortcuts or snap areas
-cask "rectangle"
 # Latest JDK from the Eclipse Foundation (Adoptium)
 cask "temurin"
 # JDK 21 from the Eclipse Foundation (Adoptium)
