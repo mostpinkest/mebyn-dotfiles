@@ -18,9 +18,6 @@ fi
 brew bundle install --file=$HOME/Brewfile --verbose
 brew bundle --force cleanup --file=$HOME/Brewfile
 
-# Ensure pipx is in /bin
-pipx ensurepath
-
 # Install bat catppuccin theme
 BATCONFIG_DIR=$(bat --config-dir)
 if [ ! -f "$BATCONFIG_DIR/themes/Catppuccin Mocha.tmTheme" ]; then

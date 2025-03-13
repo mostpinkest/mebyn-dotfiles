@@ -1,5 +1,6 @@
 tap "buo/cask-upgrade"
 tap "homebrew/cask-fonts"
+tap "oven-sh/bun"
 # wget Internet file retriever
 brew "wget"
 # Cryptography and SSL/TLS Toolkit
@@ -14,10 +15,6 @@ brew "gradle"
 brew "kotlin"
 # Platform built on V8 to build network applications
 brew "node"
-# Python version management
-brew "pyenv"
-# Execute binaries from Python packages in isolated environments
-brew "pipx"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Generate scripting interfaces to C/C++ code
@@ -34,10 +31,14 @@ brew "gitmoji"
 brew "awscli"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
-# Bazel
-brew "bazel"
 # Podman - Tool for managing OCI containers and pods
 brew "podman"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
+# Bun is an all-in-one toolkit for JavaScript and TypeScript apps
+brew "bun"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # JetBrains tools manager

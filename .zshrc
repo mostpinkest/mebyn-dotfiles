@@ -212,3 +212,10 @@ export PATH="$PATH:/Users/mesy/.local/bin"
 
 # To customize prompt, run `p10k configure` or edit ~/Code/dotfiles/.p10k.zsh.
 [[ ! -f ~/Code/dotfiles/.p10k.zsh ]] || source ~/Code/dotfiles/.p10k.zsh
+
+# bun completions
+[ -s "/Users/mesy/.bun/_bun" ] && source "/Users/mesy/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
