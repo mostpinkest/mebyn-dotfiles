@@ -69,3 +69,7 @@ cask "hiddenbar"
 cask "calibre"
 # Open-source code editor
 cask "visual-studio-code"
+# Peer to peer Bitorrent client
+cask "qbittorrent"
+# Multimedia player
+cask "vlc"
