@@ -73,3 +73,5 @@ cask "visual-studio-code"
 cask "qbittorrent"
 # Multimedia player
 cask "vlc"
+# Move and resize windows using keyboard shortcuts or snap areas
+cask "rectangle"

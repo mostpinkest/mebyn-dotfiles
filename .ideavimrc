@@ -1,5 +1,6 @@
 set clipboard+=unnamed
 set surround
+set rnu
 set visualbell
 set noerrorbells
 set NERDTree
