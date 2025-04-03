@@ -39,6 +39,8 @@ brew "neovim"
 brew "uv"
 # Bun is an all-in-one toolkit for JavaScript and TypeScript apps
 brew "bun"
+# Create, run, and share large language models (LLMs)
+brew "ollama"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # JetBrains tools manager
