@@ -33,6 +33,8 @@ brew "awscli"
 brew "jq"
 # Podman - Tool for managing OCI containers and pods
 brew "podman"
+# Alternative to docker-compose using podman
+brew "podman-compose"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Extremely fast Python package installer and resolver, written in Rust
