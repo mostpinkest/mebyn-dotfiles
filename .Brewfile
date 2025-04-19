@@ -61,8 +61,6 @@ cask "google-cloud-sdk"
 cask "spotify"
 # TempBox
 cask "tempbox"
-# Notion, App to write, plan, collaborate, and get organised
-cask "notion"
 # Fira Code
 cask "font-fira-code"
 # VPN client for secure internet access and private browsing
