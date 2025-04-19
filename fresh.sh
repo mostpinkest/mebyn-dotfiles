@@ -68,8 +68,10 @@ if [ ! -f "$BATCONFIG_DIR/themes/Catppuccin Mocha.tmTheme" ]; then
 fi
 
 # 📸 Set screenshot folder location
-echo "📸 Setting screenshot folder to ~/Documents/Screenshots"
-defaults write com.apple.screencapture location ~/Documents/Screenshots
+SCREENSHOT_DIR="$HOME/Documents/Screenshots"
+echo "📸 Setting screenshot folder to $SCREENSHOT_DIR"
+mkdir -p $SCREENSHOT_DIR 
+defaults write com.apple.screencapture location $SRSCREENSHOT_DIR 
 killall SystemUIServer
 
 # 🦀 Install rustup
