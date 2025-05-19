@@ -78,6 +78,11 @@ setup_homebrew() {
         mv "$HOME/.Brewfile" "$BREWFILE"
     fi
 
+    echo "🛠️  Adding Homebrew to PATH"
+    echo >> ~/.zprofile
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+
     echo "📦 Installing brew bundle..."
     if ! brew bundle install --file="$BREWFILE" --verbose; then
         echo "❌ Error installing brew bundle"
@@ -138,20 +143,20 @@ check_requirements() {
 }
 
 main() {
-    echo "🚀 Setting up your Mac..."
-
-    check_requirements
-
     # Check if running on macOS
     if [ "$(uname)" != "Darwin" ]; then
         echo "❌ This script is only for macOS"
         exit 1
     fi
 
+    echo "🚀 Setting up your Mac..."
+
     # Setup steps
-    setup_homebrew
     create_symlinks
+    setup_homebrew
     install_nerd_fonts
+
+    check_requirements
 
     # Setup bat theme
     setup_bat_theme

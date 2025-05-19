@@ -1,5 +1,4 @@
 tap "buo/cask-upgrade"
-tap "homebrew/cask-fonts"
 tap "oven-sh/bun"
 # wget Internet file retriever
 brew "wget"
