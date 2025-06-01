@@ -20,6 +20,10 @@ brew "ripgrep"
 brew "swig"
 # General-purpose lossless data-compression library
 brew "zlib"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg"
+# Feature-rich command-line audio/video downloader
+brew "yt-dlp"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
 # Kubernetes package manager
@@ -76,3 +80,5 @@ cask "qbittorrent"
 cask "vlc"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
+# OpenAI's official ChatGPT desktop app
+cask "chatgpt"
