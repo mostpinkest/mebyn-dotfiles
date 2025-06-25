@@ -66,3 +66,5 @@
   hidden = ! git ls-files -v | grep '^S' | cut -c3-
 [http]
 	postBuffer = 524288000
+[gitmoji]
+	enable = true
