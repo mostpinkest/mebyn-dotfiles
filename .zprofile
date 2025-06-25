@@ -14,3 +14,5 @@ source ~/.kubectl_aliases
 
 # Created by `pipx` on 2024-04-29 10:09:34
 export PATH="$PATH:/Users/mesy/.local/bin"
+
+eval "$(/opt/homebrew/bin/brew shellenv)"

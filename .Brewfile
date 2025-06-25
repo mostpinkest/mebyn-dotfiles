@@ -82,3 +82,7 @@ cask "vlc"
 cask "rectangle"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
+# Team communication and collaboration software
+cask "slack"
+# REST, GraphQL and gRPC client
+cask "yaak"
