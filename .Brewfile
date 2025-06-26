@@ -46,6 +46,8 @@ brew "uv"
 brew "bun"
 # Create, run, and share large language models (LLMs)
 brew "ollama"
+# Fast, disk space efficient package manager
+brew "pnpm"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # JetBrains tools manager
