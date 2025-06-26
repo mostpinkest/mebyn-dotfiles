@@ -32,6 +32,11 @@ install_nerd_fonts() {
     local -r BASE_URL="https://raw.githubusercontent.com/romkatv/dotfiles-public/master/.local/share/fonts/NerdFonts"
 
     for font in "${fonts[@]}"; do
+        if [ -f "$FONT_DIR/$font" ]; then
+            echo "✅ Font already installed: $font"
+            continue
+        fi
+
         echo "⬇️  Downloading: $font"
         # 🔗 Encode the font name for the URL
         encoded_font=$(python3 -c "import urllib.parse; print(urllib.parse.quote('''$font'''))")
@@ -79,8 +84,7 @@ setup_homebrew() {
     fi
 
     echo "🛠️  Adding Homebrew to PATH"
-    echo >> ~/.zprofile
-    grep -q 'eval "$(/opt/homebrew/bin/brew shellenv)"' ~/.zprofile || echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+    grep -qF -- 'eval "$(/opt/homebrew/bin/brew shellenv)"' ~/.zprofile || echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
     echo "📦 Installing brew bundle..."
@@ -173,7 +177,7 @@ main() {
         curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
     fi
 
-    echo "✨ Setup completed successfully! 🎉 Enjoy your fresh Mac! 🚀 "
+    echo "✨ Setup completed successfully! 🎉 Enjoy your fresh and updated Mac! 🚀 "
     echo "💻 Remember to restart your terminal for changes to take effect."
 }
 
