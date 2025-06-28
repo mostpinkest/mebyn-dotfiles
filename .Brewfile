@@ -88,3 +88,5 @@ cask "chatgpt"
 cask "slack"
 # REST, GraphQL and gRPC client
 cask "yaak"
+# Desktop password and login vault
+cask "bitwarden"
