@@ -1,6 +1,16 @@
 [user]
   email = melvin.sy@outlook.com
   name = Melvin
+[http]
+  postBuffer = 524288000
+[gitmoji]
+  enable = true
+[rerere]
+	enabled = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
 [init]
   defaultBranch = master
 [core]
@@ -64,7 +74,3 @@
   unhide = update-index --no-skip-worktree
   unhide-all = ls-files -v | grep -i ^S | cut -c 3- | xargs git update-index --no-skip-worktree
   hidden = ! git ls-files -v | grep '^S' | cut -c3-
-[http]
-	postBuffer = 524288000
-[gitmoji]
-	enable = true
