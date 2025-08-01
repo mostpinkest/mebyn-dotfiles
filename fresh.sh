@@ -6,6 +6,10 @@ set -eo pipefail
 readonly FONT_DIR="$HOME/Library/Fonts"
 readonly SCREENSHOT_DIR="$HOME/Documents/Screenshots"
 readonly BREWFILE="$HOME/Brewfile"
+RUSTUP_INSTALLED=""
+INSTALLED_PACKAGES=""
+UPGRADED_PACKAGES=""
+REMOVED_PACKAGES=""
 
 # Cleanup function
 cleanup() {
@@ -55,10 +59,10 @@ upgrade_brew_packages() {
     brew update || { echo "❌ Failed to update Homebrew"; return 1; }
     
     echo "⬆️  Upgrading outdated packages..."
-    brew upgrade || { echo "❌ Failed to upgrade packages"; return 1; }
+    UPGRADED_PACKAGES=$(brew upgrade)
     
     echo "🔍 Upgrading casks..."
-    brew upgrade --cask || { echo "❌ Failed to upgrade casks"; return 1; }
+    UPGRADED_CASKS=$(brew upgrade --cask --greedy --force)
     
     # Check for outdated casks that need manual intervention
     local outdated_casks
@@ -83,22 +87,17 @@ setup_homebrew() {
         mv "$HOME/.Brewfile" "$BREWFILE"
     fi
 
-    echo "🛠️  Adding Homebrew to PATH"
-    grep -qF -- 'eval "$(/opt/homebrew/bin/brew shellenv)"' ~/.zprofile || echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+    echo "🛠️ Adding Homebrew to PATH"
+    grep -qF -- 'eval "$(/opt/homebrew/bin/brew shellenv)"' ~/.zprofile || echo 'eval "$(/opt/homerebrew/bin/brew shellenv)"' >> ~/.zprofile
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
     echo "📦 Installing brew bundle..."
-    if ! brew bundle install --file="$BREWFILE" --verbose; then
-        echo "❌ Error installing brew bundle"
-        exit 1
-    fi
+    INSTALLED_PACKAGES=$(brew bundle install --file="$BREWFILE" --verbose | grep "Installing")
 
     upgrade_brew_packages
 
     echo "🧹 Performing thorough Homebrew cleanup..."
-    if ! brew bundle --force cleanup --file="$BREWFILE"; then
-        echo "⚠️ Warning: Brew bundle cleanup failed"
-    fi
+    REMOVED_PACKAGES=$(brew bundle --force cleanup --file="$BREWFILE")
     # Combine cleanup commands with error checking
     if ! { brew cleanup --prune=all && \
            brew cleanup -s && \
@@ -146,6 +145,35 @@ check_requirements() {
     done
 }
 
+print_summary() {
+    echo ""
+    echo "🎉 Fresh script summary:"
+    echo "---------------------"
+    echo "✅ Symlinks created for dotfiles"
+    echo "✅ Nerd Fonts installed"
+    echo "✅ Bat theme configured"
+    echo "✅ Screenshot directory set to $SCREENSHOT_DIR"
+    if [ -n "$RUSTUP_INSTALLED" ]; then
+        echo "✅ Rustup installed"
+    fi
+
+    if [ -n "$INSTALLED_PACKAGES" ]; then
+        echo "📦 Installed packages:"
+        echo "$INSTALLED_PACKAGES"
+    fi
+
+    if [ -n "$UPGRADED_PACKAGES" ]; then
+        echo "⬆️ Upgraded packages:"
+        echo "$UPGRADED_PACKAGES"
+    fi
+
+    if [ -n "$REMOVED_PACKAGES" ]; then
+        echo "🗑️ Removed packages:"
+        echo "$REMOVED_PACKAGES"
+    fi
+    echo "---------------------"
+}
+
 main() {
     # Check if running on macOS
     if [ "$(uname)" != "Darwin" ]; then
@@ -175,7 +203,10 @@ main() {
     if ! command -v rustup &> /dev/null; then
         echo "🦀 Installing Rustup..."
         curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+        RUSTUP_INSTALLED="true"
     fi
+
+    print_summary
 
     echo "✨ Setup completed successfully! 🎉 Enjoy your fresh and updated Mac! 🚀 "
     echo "💻 Remember to restart your terminal for changes to take effect."

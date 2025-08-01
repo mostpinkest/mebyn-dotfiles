@@ -48,6 +48,8 @@ brew "bun"
 brew "ollama"
 # Fast, disk space efficient package manager
 brew "pnpm"
+# Statistics utility to count lines of code
+brew "cloc"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # JetBrains tools manager
@@ -88,3 +90,5 @@ cask "chatgpt"
 cask "slack"
 # REST, GraphQL and gRPC client
 cask "yaak"
+# Software for Logitech devices
+cask "logi-options+"
