@@ -26,3 +26,10 @@ alias rd=rmdir
 alias run-help=man
 alias which-command=whence
 alias brewup='brew update && brew upgrade --cask && brew cleanup'
+
+# Python conveniences
+alias python=python3
+alias pip=pip3
+
+# Local tools
+alias claude="$HOME/.claude/local/claude"

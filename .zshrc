@@ -167,13 +167,9 @@ jdk() {
   java -version
 }
 
-# Configure LS syntax highlighting
-export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
+# Configure directory listing colors
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
-alias ls='ls -GFh'
-alias ll='ls -ltraG'
-alias k='kubectl'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -191,8 +187,6 @@ function zvm_after_lazy_keybindings() {
 export PATH="/usr/local/sbin:$PATH"
 
 # Pyenv configuration
-alias python=python3
-alias pip=pip3
 # alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 # export PYENV_ROOT="$HOME/.pyenv"
 # [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -209,9 +203,6 @@ BAT_THEME="base16-256"
 
 # Created by `pipx` on 2024-04-29 10:09:34
 export PATH="$PATH:$HOME/.local/bin"
-
-# To customize prompt, run `p10k configure` or edit ~/Code/dotfiles/.p10k.zsh.
-[[ ! -f ~/Code/dotfiles/.p10k.zsh ]] || source ~/Code/dotfiles/.p10k.zsh
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
@@ -231,5 +222,3 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-alias claude="$HOME/.claude/local/claude"
