@@ -13,6 +13,6 @@ source ~/.aliases
 source ~/.kubectl_aliases
 
 # Created by `pipx` on 2024-04-29 10:09:34
-export PATH="$PATH:/Users/mesy/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"

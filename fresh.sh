@@ -88,7 +88,7 @@ setup_homebrew() {
     fi
 
     echo "🛠️ Adding Homebrew to PATH"
-    grep -qF -- 'eval "$(/opt/homebrew/bin/brew shellenv)"' ~/.zprofile || echo 'eval "$(/opt/homerebrew/bin/brew shellenv)"' >> ~/.zprofile
+    grep -qF -- 'eval "$(/opt/homebrew/bin/brew shellenv)"' ~/.zprofile || echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
     echo "📦 Installing brew bundle..."

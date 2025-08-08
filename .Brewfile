@@ -50,6 +50,8 @@ brew "ollama"
 brew "pnpm"
 # Statistics utility to count lines of code
 brew "cloc"
+# OpenAI's coding agent that runs in your terminal
+brew "codex"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # JetBrains tools manager
@@ -92,3 +94,7 @@ cask "slack"
 cask "yaak"
 # Software for Logitech devices
 cask "logi-options+"
+# Video communication and virtual meeting platform
+cask "zoom"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"

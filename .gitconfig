@@ -74,5 +74,7 @@
   unhide = update-index --no-skip-worktree
   unhide-all = ls-files -v | grep -i ^S | cut -c 3- | xargs git update-index --no-skip-worktree
   hidden = ! git ls-files -v | grep '^S' | cut -c3-
+[maintenance]
+	repo = /Users/melvin/Code/dotfiles
 [push]
 	autoSetupRemote = true
