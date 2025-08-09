@@ -52,6 +52,21 @@ brew "pnpm"
 brew "cloc"
 # OpenAI's coding agent that runs in your terminal
 brew "codex"
+brew "fzf"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Shell history search with sync and TUI
+brew "atuin"
+# Smarter cd command
+brew "zoxide"
+# Per-directory environment loader
+brew "direnv"
+# Syntax-highlighting pager for git and diff
+brew "git-delta"
+# Modern ls replacement with icons and git info
+brew "eza"
+# Modern terminal resource monitor
+brew "btop"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # JetBrains tools manager
@@ -98,3 +113,7 @@ cask "logi-options+"
 cask "zoom"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Write, edit, and chat about your code with AI
+cask "cursor"
+# AtkynsonMono Nerd Font (Atkinson Hyperlegible Mono)
+cask "font-atkynson-mono-nerd-font"

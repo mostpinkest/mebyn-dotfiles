@@ -1,7 +1,3 @@
-export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-if [ ! -d "$ZIM_HOME" ]; then
-    curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
-fi
 # Start configuration added by Zim install {{{
 #
 # User configuration sourced by interactive shells
@@ -71,6 +67,7 @@ zstyle ':zim:termtitle' format '%1~'
 # Disable automatic widget re-binding on each precmd. This can be set when
 # zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # Set what highlighters will be used.
 # See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
@@ -86,22 +83,11 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 # ------------------
 export NVM_LAZY_LOAD=true
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-# Download zimfw plugin manager if missing.
-if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-  if (( ${+commands[curl]} )); then
-    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  else
-    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  fi
+if [[ -r ${ZIM_HOME}/init.zsh ]]; then
+  source ${ZIM_HOME}/init.zsh
+else
+  print -r -- "Zim not installed. Run: curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh"
 fi
-# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-  source ${ZIM_HOME}/zimfw.zsh init -q
-fi
-# Initialize modules.
-source ${ZIM_HOME}/init.zsh
 
 # ------------------------------
 # Post-init module configuration
@@ -115,13 +101,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 zmodload -F zsh/terminfo +p:terminfo
-
-# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
-for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
-for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
-for key ('k') bindkey -M vicmd ${key} history-substring-search-up
-for key ('j') bindkey -M vicmd ${key} history-substring-search-down
-unset key
 # }}} End configuration added by Zim install
 
 # ZSH profiler
@@ -130,14 +109,7 @@ unset key
 ##############################################################################
 # History Configuration
 ##############################################################################
-# Timestamp format
-case ${HIST_STAMPS-} in
-  "mm/dd/yyyy") alias history='omz_history -f' ;;
-  "dd.mm.yyyy") alias history='omz_history -E' ;;
-  "yyyy-mm-dd") alias history='omz_history -i' ;;
-  "") alias history='omz_history' ;;
-  *) alias history="omz_history -t '$HIST_STAMPS'" ;;
-esac
+# Atuin handles interactive history search; remove omz_history aliases
 
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
@@ -151,6 +123,10 @@ setopt    hist_ignore_space      # ignore commands that start with space
 setopt    hist_verify            # show command with history expansion to user before running it
 setopt    sharehistory           # Share history across terminals
 setopt    incappendhistory       # Immediately append to the history file, not just when a term is killed
+setopt    hist_save_no_dups      # don't write dupes to history file
+setopt    hist_find_no_dups      # skip dupes when searching history
+setopt    hist_save_no_dups      # don't write dupes to history file
+setopt    hist_find_no_dups      # skip dupes when searching history
 
 # Executables
 export EXECPATH=$HOME/bin
@@ -174,10 +150,8 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# ZVM Lazy key binding
+# ZVM Lazy key binding (leave Ctrl-R free for Atuin)
 function zvm_after_lazy_keybindings() {
-  # In normal mode, press Ctrl-R to invoke this widget
-  zvm_bindkey vicmd '^R' history-search-multi-word
   zvm_bindkey vicmd '^[[A' history-substring-search-up
   zvm_bindkey vicmd '^[[B' history-substring-search-down
 }
@@ -201,8 +175,7 @@ BAT_THEME="base16-256"
 # END Zsh Profiler
 # zprof
 
-# Created by `pipx` on 2024-04-29 10:09:34
-export PATH="$PATH:$HOME/.local/bin"
+# (pipx PATH is handled in ~/.zprofile)
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
@@ -211,9 +184,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# zsh-nvm handles NVM loading (lazy); no manual sourcing here
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
@@ -222,3 +193,65 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# Atuin: modern history search and sync
+if command -v atuin >/dev/null 2>&1; then
+  eval "$(atuin init zsh)"
+fi
+
+# zoxide: smarter cd
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
+
+# direnv: per-project envs
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
+
+# Completion quality tweaks (fzf-tab compatible)
+zmodload zsh/complist
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' 'r:|[._-]=* r:|=*'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$HOME/.zsh_cache"
+zstyle ':fzf-tab:*' switch-group '<' '>'
+
+# fzf defaults and completion (leave Ctrl-R to Atuin)
+if command -v fzf >/dev/null 2>&1; then
+  # Use fd if available, else ripgrep, else find
+  if command -v fd >/dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  elif command -v rg >/dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git/*'"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  else
+    export FZF_DEFAULT_COMMAND="find . -type f -not -path '*/.git/*'"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  fi
+  export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+  # Only source fzf completion, avoid key-bindings to keep Ctrl-R for Atuin
+  if command -v brew >/dev/null 2>&1; then
+    __FZF_COMPLETION="$(brew --prefix 2>/dev/null)/opt/fzf/shell/completion.zsh"
+    [[ -r $__FZF_COMPLETION ]] && source "$__FZF_COMPLETION"
+    unset __FZF_COMPLETION
+  fi
+fi
+
+# fzf-tab previews
+zstyle ':fzf-tab:complete:*' fzf-preview 'bat --style=numbers --color=always --line-range=:200 -- $realpath 2>/dev/null || ls -lah ${realpath:h}'
+
+# Handy context-aware previews
+# Directories (cd): show detailed listing
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -lah --color=always --group-directories-first $realpath 2>/dev/null || ls -lah $realpath'
+# git branches/tags (checkout/switch): show recent commit graph
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview 'git --no-pager log --graph --decorate --oneline --color=always -n 30 -- $word'
+zstyle ':fzf-tab:complete:git-switch:*'   fzf-preview 'git --no-pager log --graph --decorate --oneline --color=always -n 30 -- $word'
+# git show objects: show patch/stat
+zstyle ':fzf-tab:complete:git-show:*'     fzf-preview 'git --no-pager show --color=always --stat --patch $word'
+# git file args (add/restore): show diff for file
+zstyle ':fzf-tab:complete:git-add:*'      fzf-preview 'git --no-pager diff --color=always -- $realpath'
+zstyle ':fzf-tab:complete:git-restore:*'  fzf-preview 'git --no-pager diff --color=always -- $realpath'
+# kill: preview process details
+zstyle ':fzf-tab:complete:kill:*'         fzf-preview 'ps -p $word -o pid,ppid,stat,etime,%cpu,%mem,command -ww --no-headers'

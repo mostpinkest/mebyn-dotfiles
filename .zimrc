@@ -21,12 +21,8 @@ zmodule utility
 # Prompt
 #
 
-# Exposes to prompts how long the last command took to execute, used by asciiship.
-zmodule duration-info
-# Exposes git repository status information to prompts, used by asciiship.
-zmodule git-info
-# A heavily reduced, ASCII-only version of the Spaceship and Starship prompts.
-zmodule asciiship
+# Using Powerlevel10k for prompt; remove asciiship stack
+# (duration-info, git-info, asciiship) to avoid duplication.
 
 #
 # Completion
@@ -37,6 +33,9 @@ zmodule zsh-users/zsh-completions --fpath src
 # Enables and configures smart and extensive tab completion.
 # completion must be sourced after all modules that add completion definitions.
 zmodule completion
+
+# FZF-driven completion UI
+zmodule Aloxaf/fzf-tab
 
 #
 # Modules that must be initialized last
@@ -59,7 +58,7 @@ zmodule jeffreytse/zsh-vi-mode
 # P10k theme
 zmodule romkatv/powerlevel10k
 
-zmodule zdharma-continuum/history-search-multi-word
+# zmodule zdharma-continuum/history-search-multi-word  # redundant with Atuin and substring-search; removed
 
 # NVM for ZSH
 zmodule lukechilds/zsh-nvm
@@ -68,3 +67,6 @@ zmodule lukechilds/zsh-nvm
 zmodule ohmyzsh/ohmyzsh --source lib/git.zsh
 # Git aliases
 zmodule ohmyzsh/ohmyzsh --root plugins/git
+
+# fzf-powered Git helpers
+zmodule wfxr/forgit
