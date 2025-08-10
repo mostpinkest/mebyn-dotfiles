@@ -30,30 +30,28 @@ zmodule utility
 
 # Additional completion definitions for Zsh.
 zmodule zsh-users/zsh-completions --fpath src
+
 # Enables and configures smart and extensive tab completion.
-# completion must be sourced after all modules that add completion definitions.
 zmodule completion
 
-# FZF-driven completion UI
+# FZF-driven completion UI (load after compinit)
 zmodule Aloxaf/fzf-tab
 
 #
 # Modules that must be initialized last
 #
 
-# Fish-like syntax highlighting for Zsh.
-# zsh-users/zsh-syntax-highlighting must be sourced after completion
-#zmodule zsh-users/zsh-syntax-highlighting
+# Fish-like syntax highlighting for Zsh. Must load after completion.
+# If using zsh-users/zsh-syntax-highlighting, switch the module below.
 zmodule zdharma-continuum/fast-syntax-highlighting
-# Fish-like history search (up arrow) for Zsh.
-# zsh-users/zsh-history-substring-search must be sourced after zsh-users/zsh-syntax-highlighting
+# History substring search (Up/Down arrows integration).
 zmodule zsh-users/zsh-history-substring-search
-# Fish-like autosuggestions for Zsh.
+# VI mode should initialize before autosuggestions so autosuggest can bind on top.
+# (zvm-specific keybindings are finalized via zvm_after_lazy_keybindings in ~/.zshrc)
+zmodule jeffreytse/zsh-vi-mode
+# Autosuggestions should be the last interactive widget hook.
 zmodule zsh-users/zsh-autosuggestions
 # }}} End configuration added by Zim install
-
-# VI mode
-zmodule jeffreytse/zsh-vi-mode
 
 # P10k theme
 zmodule romkatv/powerlevel10k
@@ -63,10 +61,9 @@ zmodule romkatv/powerlevel10k
 # NVM for ZSH
 zmodule lukechilds/zsh-nvm
 
-# Oh My Zsh Plugins
+# Oh My Zsh Git helpers and aliases
 zmodule ohmyzsh/ohmyzsh --source lib/git.zsh
-# Git aliases
-zmodule ohmyzsh/ohmyzsh --root plugins/git
+zmodule ohmyzsh/ohmyzsh --source plugins/git/git.plugin.zsh
 
 # fzf-powered Git helpers
 zmodule wfxr/forgit

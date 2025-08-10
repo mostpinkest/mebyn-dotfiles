@@ -67,6 +67,8 @@ brew "git-delta"
 brew "eza"
 # Modern terminal resource monitor
 brew "btop"
+# Official tldr client written in Rust
+brew "tlrc"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # JetBrains tools manager
