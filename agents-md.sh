@@ -65,7 +65,7 @@ cat >> "$OUT_FILE" <<'EOF'
 
 ## Tooling Preferences
 
-- Rust-powered tools are preferred for efficiency and performance (e.g., `ripgrep`, `fd`, `bat`, `eza`, `zoxide`, `sd`).
+- Rust / Go powered tools are preferred for efficiency and performance (e.g., `ripgrep`, `fd`, `bat`, `eza`, `zoxide`, `sd`, `fzf`).
 
 ## Notable Workflows
 

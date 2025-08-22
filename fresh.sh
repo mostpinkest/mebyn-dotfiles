@@ -31,6 +31,20 @@ cleanup() {
     [ -n "${AFTER_CASKS_FILE:-}" ] && rm -f "$AFTER_CASKS_FILE" || true
 }
 
+# Generate Agents capabilities document and place it under ~/.codex
+generate_agents_reference() {
+    echo "🧭 Generating agents capabilities reference..."
+    local codex_dir="$HOME/.codex"
+    mkdir -p "$codex_dir"
+
+    if bash "$DOTFILES_DIR/agents-md.sh"; then
+        cp -f "$DOTFILES_DIR/AGENTS.md" "$codex_dir/AGENTS.md"
+        echo "🤖 Wrote $codex_dir/AGENTS.md"
+    else
+        echo "⚠️ Failed to generate AGENTS.md via agents-md.sh"
+    fi
+}
+
 trap 'rc=$?; cleanup "$rc"; exit "$rc"' EXIT
 
 
@@ -346,6 +360,9 @@ main() {
 
     # Setup bat theme
     setup_bat_theme
+
+    # Generate AGENTS.md to ~/.codex for agents to consume
+    generate_agents_reference
 
     # Setup screenshots directory
     echo "📸 Setting screenshot folder to $SCREENSHOT_DIR"

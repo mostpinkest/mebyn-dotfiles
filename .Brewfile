@@ -48,6 +48,7 @@ brew "pnpm"
 brew "cloc"
 # OpenAI's coding agent that runs in your terminal
 brew "codex"
+# Command-line fuzzy finder written in Go
 brew "fzf"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
