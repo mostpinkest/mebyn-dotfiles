@@ -149,8 +149,33 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 
 # ZVM Lazy key binding (leave Ctrl-R free for Atuin)
 function zvm_after_lazy_keybindings() {
-  zvm_bindkey vicmd '^[[A' history-substring-search-up
-  zvm_bindkey vicmd '^[[B' history-substring-search-down
+  # Robust arrow bindings for history-substring-search across keymaps
+  local up_ti down_ti
+  up_ti=${terminfo[kcuu1]:-$'\e[A'}
+  down_ti=${terminfo[kcud1]:-$'\e[B'}
+  local -a UPS=( "$up_ti" $'\e[A' $'\eOA' )
+  local -a DOWNS=( "$down_ti" $'\e[B' $'\eOB' )
+
+  if zle -la | grep -qx 'history-substring-search-up'; then
+    local k
+    for k in ${UPS[@]}; do
+      bindkey -M emacs "$k" history-substring-search-up
+      zvm_bindkey viins "$k" history-substring-search-up
+      zvm_bindkey vicmd "$k" history-substring-search-up
+    done
+    for k in ${DOWNS[@]}; do
+      bindkey -M emacs "$k" history-substring-search-down
+      zvm_bindkey viins "$k" history-substring-search-down
+      zvm_bindkey vicmd "$k" history-substring-search-down
+    done
+  fi
+
+  # Ensure Ctrl-R triggers Atuin after zsh-vi-mode lazy bindings
+  if zle -la | grep -qx 'atuin-search'; then
+    bindkey -M emacs '^R' atuin-search 2>/dev/null || true
+    zvm_bindkey viins '^R' atuin-search
+    zvm_bindkey vicmd '^R' atuin-search
+  fi
 }
 
 # autoload -U +X bashcompinit && bashcompinit
@@ -193,7 +218,7 @@ esac
 
 # Atuin: modern history search and sync
 if command -v atuin >/dev/null 2>&1; then
-  eval "$(atuin init zsh)"
+  eval "$(atuin init zsh --disable-up-arrow)"
 fi
 
 # zoxide: smarter cd

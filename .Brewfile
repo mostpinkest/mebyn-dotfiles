@@ -34,10 +34,6 @@ brew "gitmoji"
 brew "awscli"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
-# Podman - Tool for managing OCI containers and pods
-brew "podman"
-# Alternative to docker-compose using podman
-brew "podman-compose"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Extremely fast Python package installer and resolver, written in Rust
@@ -69,6 +65,10 @@ brew "eza"
 brew "btop"
 # Official tldr client written in Rust
 brew "tlrc"
+# Pack, ship and run any application as a lightweight container
+brew "docker"
+# Intuitive find & replace CLI
+brew "sd"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # JetBrains tools manager
