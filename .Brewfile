@@ -65,6 +65,8 @@ brew "eza"
 brew "btop"
 # Official tldr client written in Rust
 brew "tlrc"
+# Container runtimes on MacOS (and Linux) with minimal setup
+brew "colima"
 # Pack, ship and run any application as a lightweight container
 brew "docker"
 # Intuitive find & replace CLI
