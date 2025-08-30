@@ -38,7 +38,6 @@ generate_agents_reference() {
     mkdir -p "$codex_dir"
 
     if bash "$DOTFILES_DIR/agents-md.sh"; then
-        cp -f "$DOTFILES_DIR/AGENTS.md" "$codex_dir/AGENTS.md"
         echo "🤖 Wrote $codex_dir/AGENTS.md"
     else
         echo "⚠️ Failed to generate AGENTS.md via agents-md.sh"

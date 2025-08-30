@@ -14,6 +14,10 @@ BREW_VERSION=$(brew --version | head -n1 | awk '{print $2}')
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTFILES_DIR="$SCRIPT_DIR"
 
+# Output directory for agents reference
+CODEX_DIR="${HOME}/.codex"
+mkdir -p "$CODEX_DIR"
+
 # Dotfiles inputs (optional)
 ZSHRC="$DOTFILES_DIR/.zshrc"
 ZPROFILE="$DOTFILES_DIR/.zprofile"
@@ -31,7 +35,8 @@ CASK_LIST=$(brew list --cask 2>/dev/null | sort || true)
 FORMULA_COUNT=$(printf "%s\n" "$FORMULA_LIST" | sed '/^$/d' | wc -l | tr -d ' ')
 CASK_COUNT=$(printf "%s\n" "$CASK_LIST" | sed '/^$/d' | wc -l | tr -d ' ')
 
-OUT_FILE="AGENTS.md"
+# Write directly to ~/.codex/AGENTS.md
+OUT_FILE="${CODEX_DIR}/AGENTS.md"
 
 # Header and overview (with variable expansion, no backticks)
 cat > "$OUT_FILE" <<EOF
@@ -66,6 +71,7 @@ cat >> "$OUT_FILE" <<'EOF'
 ## Tooling Preferences
 
 - Rust / Go powered tools are preferred for efficiency and performance (e.g., `ripgrep`, `fd`, `bat`, `eza`, `zoxide`, `sd`, `fzf`).
+- Quotes: prefer ASCII `'` and `"` in code and docs; avoid curly "smart quotes".
 
 ## Notable Workflows
 

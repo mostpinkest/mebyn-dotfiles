@@ -106,8 +106,6 @@ cask "qbittorrent"
 cask "vlc"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
-# OpenAI's official ChatGPT desktop app
-cask "chatgpt"
 # Team communication and collaboration software
 cask "slack"
 # REST, GraphQL and gRPC client
