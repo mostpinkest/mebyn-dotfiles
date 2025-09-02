@@ -72,8 +72,10 @@ brew "colima"
 brew "docker"
 # Intuitive find & replace CLI
 brew "sd"
-# Terminal emulator as alternative to Apple's Terminal app
-cask "iterm2"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Graph visualization software from AT&T and Bell Labs
+brew "graphviz"
 # JetBrains tools manager
 cask "jetbrains-toolbox"
 # Clipboard manager
@@ -120,3 +122,7 @@ cask "obsidian"
 cask "cursor"
 # AtkynsonMono Nerd Font (Atkinson Hyperlegible Mono)
 cask "font-atkynson-mono-nerd-font"
+# Dictation tool including LLM reformatting
+cask "superwhisper"
+# Managed client-based VPN service to securely access AWS resources
+cask "aws-vpn-client"

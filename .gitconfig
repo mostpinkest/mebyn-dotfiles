@@ -1,6 +1,8 @@
 [user]
   email = melvin.sy@outlook.com
   name = Melvin
+[includeIf "gitdir:~/Code/ImportGenius/"]
+  path = ~/.gitconfig-ig
 [http]
   postBuffer = 524288000
 [gitmoji]
@@ -91,6 +93,7 @@
   gl = log --graph --decorate --date=relative --pretty=format:'%C(auto)%h%d %s %C(blue)<%cn> %C(green)%cr'
   gls = -c delta.side-by-side=true log --graph --decorate --date=relative --pretty=format:'%C(auto)%h%d %s %C(blue)<%cn> %C(green)%cr' -p
 [maintenance]
-	repo = ~/Code/dotfiles
+  repo = ~/Code/dotfiles
+  repo = /Users/melvin/Code/ImportGenius/client-app/iscanv2
 [push]
-	autoSetupRemote = true
+  autoSetupRemote = true
