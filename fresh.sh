@@ -293,6 +293,34 @@ check_requirements() {
     done
 }
 
+# Ensure sudo leverages Touch ID / biometrics for CLI usage
+enable_cli_biometrics() {
+    if ! command -v sudo >/dev/null 2>&1; then
+        echo "⚠️ sudo command not available; skipping Touch ID setup"
+        return 0
+    fi
+
+    local pam_sudo_file="/etc/pam.d/sudo"
+    if [ ! -f "$pam_sudo_file" ]; then
+        echo "⚠️ $pam_sudo_file not found; skipping Touch ID setup"
+        return 0
+    fi
+
+    local pam_local_file="/etc/pam.d/sudo_local"
+    if [ -f "$pam_local_file" ] && grep -Eq 'pam_(watchid|tid)\.so' "$pam_local_file"; then
+        echo "✅ Touch ID already enabled for sudo"
+        return 0
+    fi
+
+    echo "🔐 Enabling Touch ID authentication for sudo via pam-watchid..."
+    if /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/logicer16/pam-watchid/HEAD/install.sh)" -- enable; then
+        echo "✅ Touch ID enabled for sudo"
+    else
+        echo "❌ Failed to enable Touch ID via pam-watchid"
+        return 1
+    fi
+}
+
 # Ensure Zimfw is installed and fetch modules defined in ~/.zimrc
 setup_zimfw() {
     echo "🔧 Ensuring Zimfw and modules..."
@@ -350,6 +378,9 @@ main() {
 
     # Check requirements before running any network-dependent steps
     check_requirements
+
+    # Enable biometrics for sudo if available
+    enable_cli_biometrics
 
     # Setup steps
     create_symlinks
