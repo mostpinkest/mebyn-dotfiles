@@ -70,6 +70,8 @@ brew "tlrc"
 brew "colima"
 # Pack, ship and run any application as a lightweight container
 brew "docker"
+# Isolated development environments using Docker
+brew "docker-compose"
 # Intuitive find & replace CLI
 brew "sd"
 # Terminal emulator that uses platform-native UI and GPU acceleration
